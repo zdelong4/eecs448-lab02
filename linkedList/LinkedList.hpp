@@ -37,15 +37,18 @@ bool LinkedList<T>::search(T value) const
 {
 	Node<T>* temp = m_front;
 	bool isFound = false;
-    while (temp != nullptr){  
-        if (temp->getValue() == value){ 
-            isFound = true;
-		}  
-        temp = temp->getNext();  
-    }  
-    return isFound;  
-}  
+	while(temp != nullptr){
+		if(temp->getValue() == value){
+			isFound = true;
+	}
+		temp = temp->getNext();
+	/** TODO 
+		Fix this method
+	*/
+	}
 
+	return(isFound);
+}
 
 template <typename T>
 std::vector<T> LinkedList<T>::toVector() const
@@ -97,18 +100,20 @@ void LinkedList<T>::addFront(T value)
 
 template <typename T>
 bool LinkedList<T>::removeBack()
-{
-	if(isEmmpty()){
+{	if(isEmpty()){
 		return false;
 	}
-	Node<T>* lastNode = nullptr;
+	Node<T>* lastNode =  nullptr;
 	Node<T>* secondintoLast = m_front;
-    while (secondintoLast->getNext()->getNext() != nullptr){ 
-        secondintoLast = secondintoLast->getNext();
-	} 
-    delete (second_last->getNext());  
-    m_size--;
-	return true
+	for(int i = 0; i < m_size-2; i++){
+		secondintoLast = secondintoLast->getNext();
+	}
+	lastNode = secondintoLast->getNext();
+	secondintoLast->setNext(nullptr);
+	delete lastNode;
+	m_size--;
+	return true;
+
 }	
 
 template <typename T>
